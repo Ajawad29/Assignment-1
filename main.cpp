@@ -1,238 +1,92 @@
 #include <iostream>
-#include<string>
+#include <string>
 using namespace std;
-class TicTacToe{
+class HugeInteger{
 private:
-    int x[3][3];
+    int num[40];
+    string x;
     void init(){
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j <3 ; j++) {
-                x[i][j]=0;
-            }
-
+        for(int a=39;a>=0;a--){
+            num[a]=0;
         }
     }
 public:
-    TicTacToe(){
+    HugeInteger(){
         init();
     }
-    void turnPlayer1(int a,int b){
-        int y=a;
-        int z=b;
-        int d=0;
-        while(x[y][z]!=0){
-            cout<<"INVALID ENTERED COLUMN AND ROW .ALREADY FILLED OR INVALID COORDINATES"<<endl;
-            cout<<"ENTER ROW:";
-            cin>>y;
-            cout<<endl<<"ENTER COLUMN:";
-            cin>>z;
-            cout<<endl<<endl;
-
-        }
-        x[y][z]=1;
-        if (x[0][0]==1 && x[0][1]==1 && x[0][2]==1){
-            cout<<"GAME OVER "<<endl;
-            cout<<"WINNER IS PLAYER 1"<<endl;
-            display();
-            init();
-        }
-        if (x[1][0]==1 && x[1][1]==1 && x[1][2]==1){
-            cout<<"GAME OVER "<<endl;
-            cout<<"WINNER IS PLAYER 1"<<endl;
-            display();
-            init();
-        }
-        if (x[2][0]==1 && x[2][1]==1 && x[2][2]==1){
-            cout<<"GAME OVER "<<endl;
-            cout<<"WINNER IS PLAYER 1"<<endl;
-            display();
-            init();
-        }
-        if (x[0][0]==1 && x[1][0]==1 && x[2][0]==1){
-            cout<<"GAME OVER "<<endl;
-            cout<<"WINNER IS PLAYER 1"<<endl;
-            display();
-            init();
-        }
-        if (x[0][1]==1 && x[1][1]==1 && x[2][1]==1){
-            cout<<"GAME OVER "<<endl;
-            cout<<"WINNER IS PLAYER 1"<<endl;
-            display();
-            init();
-        }
-        if (x[0][2]==1 && x[1][2]==1 && x[2][2]==1){
-            cout<<"GAME OVER "<<endl;
-            cout<<"WINNER IS PLAYER 1"<<endl;
-            display();
-            init();
-        }
-        if (x[0][0]==1 && x[1][1]==1 && x[2][2]==1){
-            cout<<"GAME OVER "<<endl;
-            cout<<"WINNER IS PLAYER 1"<<endl;
-            display();
-            init();
-        }
-        if (x[0][2]==1 && x[1][1]==1 && x[2][0]==1){
-            cout<<"GAME OVER "<<endl;
-            cout<<"WINNER IS PLAYER 1"<<endl;
-            display();
-            init();
-        }
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                if(x[i][j]!=0){
-                    d=d+1;
-                }
-
-            }
-
-        }
-        if (d==9){
-            cout<<endl;
-            cout<<endl;
-            cout<<"ITS A DRAW";
-            display();
-            init();
-        }
-
-
+    HugeInteger(string a){
+        setInteger(a);
 
     }
-    void turnplayer2(int a,int b){
-        int y=a;
-        int z=b;
-        int d=0;
-        while(x[y][z]!=0){
-            cout<<"INVALID ENTERED COLUMN AND ROW .ALREADY FILLED OR INVALID COORDINATES"<<endl;
-            cout<<"ENTER ROW:";
-            cin>>y;
-            cout<<endl<<"ENTER COLUMN:";
-            cin>>z;
-            cout<<endl<<endl;
+    void setInteger(string b){
 
-        }
-        x[y][z]=2;
-        if (x[0][0]==2 && x[0][1]==2 && x[0][2]==2){
-            cout<<"GAME OVER "<<endl;
-            cout<<"WINNER IS PLAYER 2"<<endl;
-            display();
-            init();
-        }
-        if (x[1][0]==2 && x[1][1]==2 && x[1][2]==2){
-            cout<<"GAME OVER "<<endl;
-            cout<<"WINNER IS PLAYER 2"<<endl;
-            display();
-            init();
-        }
-        if (x[2][0]==2 && x[2][1]==2 && x[2][2]==2){
-            cout<<"GAME OVER "<<endl;
-            cout<<"WINNER IS PLAYER 2"<<endl;
-            display();
-            init();
-        }
-        if (x[0][0]==2 && x[1][0]==2 && x[2][0]==2){
-            cout<<"GAME OVER "<<endl;
-            cout<<"WINNER IS PLAYER 2"<<endl;
-            display();
-            init();
-        }
-        if (x[0][1]==2 && x[1][1]==2 && x[2][1]==2){
-            cout<<"GAME OVER "<<endl;
-            cout<<"WINNER IS PLAYER 2"<<endl;
-            display();
-            init();
-        }
-        if (x[0][2]==2 && x[1][2]==2 && x[2][2]==2){
-            cout<<"GAME OVER "<<endl;
-            cout<<"WINNER IS PLAYER 2"<<endl;
-            display();
-            init();
-        }
-        if (x[0][0]==2 && x[1][1]==2 && x[2][2]==2){
-            cout<<"GAME OVER "<<endl;
-            cout<<"WINNER IS PLAYER 2"<<endl;
-            display();
-            init();
-        }
-        if (x[0][2]==2 && x[1][1]==2 && x[2][0]==2){
-            cout<<"GAME OVER "<<endl;
-            cout<<"WINNER IS PLAYER 2"<<endl;
-            display();
-            init();
-        }
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                if(x[i][j]!=0){
-                    d=d+1;
-                }
+        x=b;
+        init();
+        int y;
+        y=x.length();
+        int z=y-1;
+        for (int i = 39; i>39-y ;i--){
+            num[i]=x[z]-48;
+            z=z-1;
 
-            }
-
-        }
-        if (d==9){
-            cout<<endl;
-            cout<<endl;
-            cout<<"ITS A DRAW"<<endl<<endl;
-            display();
-            init();
         }
 
     }
     void display(){
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                cout<<x[i][j]<<"\t";
-
-            }
-            cout<<endl;
+        for (int i = 0; i < 40 ; i++) {
+            cout<<num[i];
 
         }
-        cout<<endl<<endl;
     }
+    HugeInteger add(HugeInteger c) {
+        HugeInteger d;
+        for (int i = 39; i >= 0; i--) {
+            d.num[i] = d.num[i] + c.num[i] + num[i];
+            if (d.num[i] >= 10) {
+                d.num[i] = d.num[i] - 10;
+                d.num[i - 1] = d.num[i - 1] + 1;
+            }
+        }
+
+        return d;
+    }
+
+    HugeInteger subt(HugeInteger c){
+        HugeInteger d;
+        for (int i = 39; i >=0 ; i--) {
+            if(num[i]<c.num[i]){
+                num[i-1]=num[i-1]-1;
+                num[i]=num[i]+10;
+            }
+            d.num[i]=num[i]-c.num[i];
+
+        }
+
+
+        return d;
+    }
+
+
+
 
 };
 int main() {
-    TicTacToe game1;
-    game1.display();
-    game1.turnplayer2(1,1);
-    game1.display();
-    game1.turnPlayer1(0,0);
-    game1.display();
-    game1.turnplayer2(0,2);
-    game1.display();
-    game1.turnPlayer1(0,1);
-    game1.display();
-    game1.turnplayer2(1,0);
-    game1.display();
-    game1.turnPlayer1(1,2);
-    game1.display();
-    game1.turnplayer2(2,1);
-    game1.display();
-    game1.turnPlayer1(2,0);
-    game1.display();
-    game1.turnplayer2(2,2);
-    cout<<endl<<endl;
-    game1.display();
-    game1.turnplayer2(1,1);
-    game1.display();
-    game1.turnPlayer1(0,0);
-    game1.display();
-    game1.turnplayer2(0,2);
-    game1.display();
-    game1.turnPlayer1(0,1);
-    game1.display();
-    game1.turnplayer2(2,0);
-    cout<<endl<<endl<<endl;
-    game1.display();
-    game1.turnPlayer1(1,2);
-    game1.display();
-    game1.turnplayer2(0,0);
-    game1.display();
-    game1.turnPlayer1(0,2);
-    game1.display();
-    game1.turnplayer2(0,1);
-    game1.display();
-    game1.turnPlayer1(2,2);
+    HugeInteger a("1510");
+    HugeInteger b("99");
+    HugeInteger c;
+    a.display();
+    cout<<endl;
+    b.display();
+    cout<<endl;
+    c.display();
+    cout<<endl;
+    c=a.add(b);
+    c.display();
+    cout<<endl;
+    c=a.subt(b);
+    c.display();
+
+
 
     return 0;
 }
