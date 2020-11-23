@@ -1,140 +1,159 @@
 #include <iostream>
-#include <string>
+#include<string>
 using namespace std;
-class Time{
+class Date{
 private:
-    int hour;
-    int minute;
-    int second;
-    string zone;
-    void change1(){
-        zone="PM";
-    }
-    void change2(){
-        zone="AM";
-    }
+    int day;
+    int month;
+    int year;
 public:
-    Time(){
-        hour=12;
-        minute=00;
-        second=00;
-        zone="AM";
-
-
-
+    Date(){
+        day=1;
+        month=1;
+        year=1990;
     }
-    Time(int a,int b,int c, string d){
-        setHour(a);
-        setMinute(b);
-        setSecond(c);
-        zone=d;
-
+    Date(int a, int b, int c){
+        setYear(c);
+        setMonth(b);
+        setDay(a);
 
     }
 
-    int getHour() {
-        return hour;
+    int getDay() const {
+        return day;
     }
 
-    int getMinute() {
-        return minute;
+    int getMonth() const {
+        return month;
     }
 
-    int getSecond() {
-        return second;
+    int getYear() const {
+        return year;
     }
 
-    string getZone() {
-        return zone;
-    }
-
-    void setZone(string a) {
-        zone = a;
-    }
-
-    void setSecond(int a) {
+    void setYear(int a) {
         int b=a;
-        second = b;
+        while(b<1990 || b>2100){
+            cout<<"INVALID INPUT FOR YEAR RE-ENTER VALUE BETWEEN 1990 to 2100 : ";
+            cin>>b;
+            cout<<endl<<endl<<endl;
+        }
+
+        year = b;
     }
 
-    void setMinute(int a) {
+    void setMonth(int a) {
         int b=a;
-        minute = b;
+        while(b<1 || b>12){
+            cout<<"INVALID INPUT FOR MONTH RE-ENTER VALUE BETWEEN 1 to 12 : ";
+            cin>>b;
+            cout<<endl<<endl<<endl;
+
+
+
+        }
+        month = b;
+
     }
 
-    void setHour(int a) {
+    void setDay(int a) {
         int b=a;
-        hour = b;
-    }
-    void display(){
-        if (hour<10){
-            cout<<"0"<<hour<<":";
-        }
-        else{
-            cout<<hour<<":";
-        }
-        if(minute<10){
-            cout<<"0"<<minute<<":";
-        }
-        else{
-            cout<<minute<<":";
-        }
-        if (second<10){
-            cout<<"0"<<second<<"  ";
-        }
-        else{
-            cout<<second<<"  ";
-        }
-        cout<<zone<<endl<<endl;
-    }
-    void tick(){
-        second=second+1;
-        if(second==60){
-            second=0;
-            minute=minute+1;
-        }
-        if(minute==60){
-            minute=0;
-            hour=hour+1;
-            if(hour==12){
-                if(zone=="AM"){
-                    change1();
-                }
-                else{
-                    change2();
-                }
+        if (month==1 || month==3 || month==5 || month==7 || month==8 ||month==10||month==12){
+            while (b<1 || b>31){
+                cout<<"INVALID INPUT FOR DAY RE-ENTER VALUE BETWEEN 1 to 31 : ";
+                cin>>b;
+                cout<<endl<<endl<<endl;
+
+
 
             }
+        }
+        if (month==4 || month==6 || month==9 || month==11){
+            while (b<1 || b>30){
+                cout<<"INVALID INPUT FOR DAY RE-ENTER VALUE BETWEEN 1 to 30 : ";
+                cin>>b;
+                cout<<endl<<endl<<endl;
 
 
+
+            }
         }
-        if(hour==13){
-            hour=1;
+        if (month==2){
+            while (b<1 || b>28){
+                cout<<"INVALID INPUT FOR DAY RE-ENTER VALUE BETWEEN 1 to 28 : ";
+                cin>>b;
+                cout<<endl<<endl<<endl;
+
+
+
+            }
         }
+        day=b;
+
+
 
     }
+    void display(){
+        if(day<10){
+            cout<<"0"<<day<<"/";
+        }
+        else{
+            cout<<day<<"/";
+        }
+        if(month<10){
+            cout<<"0"<<month<<"/";
+        }
+        else{
+            cout<<month<<"/";
+        }
+        cout<<year<<"  "<<endl<<endl;
+    }
+
+    void nextDay(){
+        day=day+1;
+        if (month==1 || month==3 || month==5 || month==7 || month==8 ||month==10||month==12){
+            if (day==32){
+                day=1;
+                month=month+1;
+                if(month==13){
+                    month=1;
+                    year=year+1;
+                }
+            }
+        }
+        if (month==4 || month==6 || month==9 || month==11){
+            if(day==31){
+                day=1;
+                month=month+1;
+            }
+        }
+        if(month==2){
+            if(day==29){
+                day=1;
+                month=month+1;
+            }
+        }
+
+
+
+
+        }
+
 
 };
 int main() {
-    Time t1(12,0,0,"AM");
-    t1.display();
-    for(int i=1;i<=60;i++){
-        t1.tick();
-    }
-    t1.display();
-    for(int i=1;i<=3600;i++){
-        t1.tick();
-    }
-    t1.display();
-    for(int i=1;i<=43200;i++){
-        t1.tick();
-    }
-    t1.display();
-    for (int j = 1; j <=43200 ; j++) {
-        t1.tick();
+    Date d1(1,2,2000);
+    Date d2(1,12,2000);
+    Date d3(1,6,2000);
+    for (int i = 1; i <=31 ; i++) {
+        d1.nextDay();
+        d2.nextDay();
+        d3.nextDay();
 
     }
-    t1.display();
+    d1.display();
+    d2.display();
+    d3.display();
 
     return 0;
 }
