@@ -1,155 +1,66 @@
 #include <iostream>
 #include <string>
 using namespace std;
-class Time{
+class Rectangle{
 private:
-    int hour;
-    int minute;
-    int second;
-    string zone;
-    void change1(){
-        zone="PM";
-    }
-    void change2(){
-        zone="AM";
-    }
+    float length;
+    float width;
 public:
-    Time(){
-        hour=12;
-        minute=00;
-        second=00;
-        zone="AM";
-
-
-
+    Rectangle(){
+        length=1.0;
+        width=1.0;
     }
-    Time(int a,int b,int c, string d){
-        setHour(a);
-        setMinute(b);
-        setSecond(c);
-        zone=d;
-
-
+    Rectangle(float a,float b){
+        setLength(a);
+        setWidth(b);
     }
 
-    int getHour() {
-        return hour;
+    void setLength(float x){
+        float a=x;
+        while(a<1 || a>19){
+            cout<<"invalid value entered please enter value for length betweeen 1 and 19 : ";
+            cin>>a;
+            cout<<endl<<endl;
+        }
+        length=a;
     }
 
-    int getMinute() {
-        return minute;
+    float getLength(){
+        return length;
     }
 
-    int getSecond() {
-        return second;
-    }
-
-    string getZone() {
-        return zone;
-    }
-
-    void setZone(string a) {
-        zone = a;
-    }
-
-    void setSecond(int a) {
-        int b=a;
-        while(b<0 || b>59){
-            cout<<"INVALID INPUT RE-ENTER SECOND:";
+    void setWidth(float y){
+        float b=y;
+        while(b<1 || b>19){
+            cout<<"invalid value entered please enter value for width betweeen 1 and 19 : ";
             cin>>b;
             cout<<endl<<endl;
         }
-        second = b;
-    }
-
-    void setMinute(int a) {
-        int b=a;
-        while(b<0 || b>59){
-            cout<<"INVALID INPUT RE-ENTER MINUTE:";
-            cin>>b;
-            cout<<endl<<endl;
-        }
-        minute = b;
-    }
-
-    void setHour(int a) {
-        int b=a;
-        while(b<1 || b>12){
-            cout<<"INVALID INPUT RE-ENTER HOUR:";
-            cin>>b;
-            cout<<endl<<endl;
-        }
-        hour = b;
-    }
-    void display(){
-        if (hour<10){
-            cout<<"0"<<hour<<":";
-        }
-        else{
-            cout<<hour<<":";
-        }
-        if(minute<10){
-            cout<<"0"<<minute<<":";
-        }
-        else{
-            cout<<minute<<":";
-        }
-        if (second<10){
-            cout<<"0"<<second<<"  ";
-        }
-        else{
-            cout<<second<<"  ";
-        }
-        cout<<zone<<endl<<endl;
-    }
-    void tick(){
-        second=second+1;
-        if(second==60){
-            second=0;
-            minute=minute+1;
-        }
-        if(minute==60){
-            minute=0;
-            hour=hour+1;
-            if(hour==12){
-                if(zone=="AM"){
-                    change1();
-                }
-                else{
-                    change2();
-                }
-
-            }
-
-
-        }
-        if(hour==13){
-            hour=1;
-        }
+        width=b;
 
     }
+    float getWidth(){
+        return width;
+    }
+    float getArea(){
+        float area;
+        area=length*width;
+        return area;
+    }
+    float getPerimeter(){
+        float perimeter=2*(length+width);
+        return perimeter;
+    }
+
 
 };
 int main() {
-    Time t1(12,0,0,"AM");
-    t1.display();
-    for(int i=1;i<=60;i++){
-        t1.tick();
-    }
-    t1.display();
-    for(int i=1;i<=3600;i++){
-        t1.tick();
-    }
-    t1.display();
-    for(int i=1;i<=43200;i++){
-        t1.tick();
-    }
-    t1.display();
-    for (int j = 1; j <=43200 ; j++) {
-        t1.tick();
-
-    }
-    t1.display();
-
+    Rectangle a1(25,2);
+    float x;
+    float y;
+    x=a1.getArea();
+    y=a1.getPerimeter();
+    cout<<"area = "<<x<<endl;
+    cout<<"perimeter ="<<y;
     return 0;
 }
