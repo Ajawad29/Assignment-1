@@ -1,24 +1,145 @@
 #include <iostream>
-#include<string>
+#include <string>
 using namespace std;
-class Date{
+class DateAndTime{
 private:
+    int hour;
+    int minute;
+    int second;
     int day;
     int month;
     int year;
+    string zone;
+    void change1(){
+        zone="PM";
+    }
+    void change2(){
+        zone="AM";
+    }
 public:
-    Date(){
+    DateAndTime(){
+        hour=12;
+        minute=00;
+        second=00;
+        zone="AM";
         day=1;
         month=1;
         year=1990;
+
+
+
+
     }
-    Date(int a, int b, int c){
-        setYear(c);
-        setMonth(b);
-        setDay(a);
+    DateAndTime(int a,int b,int c, string d,int e,int f,int g){
+        setHour(a);
+        setMinute(b);
+        setSecond(c);
+        zone=d;
+        setYear(g);
+        setMonth(f);
+        setDay(e);
+
+
 
     }
 
+    int getHour() {
+        return hour;
+    }
+
+    int getMinute() {
+        return minute;
+    }
+
+    int getSecond() {
+        return second;
+    }
+
+    string getZone() {
+        return zone;
+    }
+
+    void setZone(string a) {
+        zone = a;
+    }
+
+    void setSecond(int a) {
+        int b=a;
+        while(b<0 || b>59){
+            cout<<"INVALID INPUT RE-ENTER SECOND:";
+            cin>>b;
+            cout<<endl<<endl;
+        }
+        second = b;
+    }
+
+    void setMinute(int a) {
+        int b=a;
+        while(b<0 || b>59){
+            cout<<"INVALID INPUT RE-ENTER MINUTE:";
+            cin>>b;
+            cout<<endl<<endl;
+        }
+        minute = b;
+    }
+
+    void setHour(int a) {
+        int b=a;
+        while(b<1 || b>12){
+            cout<<"INVALID INPUT RE-ENTER HOUR:";
+            cin>>b;
+            cout<<endl<<endl;
+        }
+        hour = b;
+    }
+    void printStandard(){
+        if (hour<10){
+            cout<<"0"<<hour<<":";
+        }
+        else{
+            cout<<hour<<":";
+        }
+        if(minute<10){
+            cout<<"0"<<minute<<":";
+        }
+        else{
+            cout<<minute<<":";
+        }
+        if (second<10){
+            cout<<"0"<<second<<"  ";
+        }
+        else{
+            cout<<second<<"  ";
+        }
+        cout<<zone<<endl<<endl;
+    }
+    void tick(){
+        second=second+1;
+        if(second==60){
+            second=0;
+            minute=minute+1;
+        }
+        if(minute==60){
+            minute=0;
+            hour=hour+1;
+            if(hour==12){
+                if(zone=="AM"){
+                    change1();
+                }
+                else{
+                    change2();
+                    nextDay();
+                }
+
+            }
+
+
+        }
+        if(hour==13){
+            hour=1;
+        }
+
+    }
     int getDay() const {
         return day;
     }
@@ -93,7 +214,7 @@ public:
 
 
     }
-    void display(){
+    void printUniversal(){
         if(day<10){
             cout<<"0"<<day<<"/";
         }
@@ -137,23 +258,22 @@ public:
 
 
 
-        }
+    }
+
+
 
 
 };
 int main() {
-    Date d1(1,2,2000);
-    Date d2(1,12,2000);
-    Date d3(1,6,2000);
-    for (int i = 1; i <=31 ; i++) {
-        d1.nextDay();
-        d2.nextDay();
-        d3.nextDay();
+    DateAndTime z(12,00,00,"AM",1,1,2001);
+    z.printStandard();
+    z.printUniversal();
+    for (int i = 0; i < 86400; i++) {
+        z.tick();
+        z.printStandard();
+        z.printUniversal();
 
     }
-    d1.display();
-    d2.display();
-    d3.display();
 
     return 0;
 }
