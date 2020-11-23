@@ -1,14 +1,11 @@
 #include <iostream>
 #include <string>
 using namespace std;
-class DateAndTime{
+class Time{
 private:
     int hour;
     int minute;
     int second;
-    int day;
-    int month;
-    int year;
     string zone;
     void change1(){
         zone="PM";
@@ -17,28 +14,20 @@ private:
         zone="AM";
     }
 public:
-    DateAndTime(){
+    Time(){
         hour=12;
         minute=00;
         second=00;
         zone="AM";
-        day=1;
-        month=1;
-        year=1990;
-
 
 
 
     }
-    DateAndTime(int a,int b,int c, string d,int e,int f,int g){
+    Time(int a,int b,int c, string d){
         setHour(a);
         setMinute(b);
         setSecond(c);
         zone=d;
-        setYear(g);
-        setMonth(f);
-        setDay(e);
-
 
 
     }
@@ -92,7 +81,7 @@ public:
         }
         hour = b;
     }
-    void printStandard(){
+    void display(){
         if (hour<10){
             cout<<"0"<<hour<<":";
         }
@@ -128,7 +117,6 @@ public:
                 }
                 else{
                     change2();
-                    nextDay();
                 }
 
             }
@@ -140,140 +128,28 @@ public:
         }
 
     }
-    int getDay() const {
-        return day;
-    }
-
-    int getMonth() const {
-        return month;
-    }
-
-    int getYear() const {
-        return year;
-    }
-
-    void setYear(int a) {
-        int b=a;
-        while(b<1990 || b>2100){
-            cout<<"INVALID INPUT FOR YEAR RE-ENTER VALUE BETWEEN 1990 to 2100 : ";
-            cin>>b;
-            cout<<endl<<endl<<endl;
-        }
-
-        year = b;
-    }
-
-    void setMonth(int a) {
-        int b=a;
-        while(b<1 || b>12){
-            cout<<"INVALID INPUT FOR MONTH RE-ENTER VALUE BETWEEN 1 to 12 : ";
-            cin>>b;
-            cout<<endl<<endl<<endl;
-
-
-
-        }
-        month = b;
-
-    }
-
-    void setDay(int a) {
-        int b=a;
-        if (month==1 || month==3 || month==5 || month==7 || month==8 ||month==10||month==12){
-            while (b<1 || b>31){
-                cout<<"INVALID INPUT FOR DAY RE-ENTER VALUE BETWEEN 1 to 31 : ";
-                cin>>b;
-                cout<<endl<<endl<<endl;
-
-
-
-            }
-        }
-        if (month==4 || month==6 || month==9 || month==11){
-            while (b<1 || b>30){
-                cout<<"INVALID INPUT FOR DAY RE-ENTER VALUE BETWEEN 1 to 30 : ";
-                cin>>b;
-                cout<<endl<<endl<<endl;
-
-
-
-            }
-        }
-        if (month==2){
-            while (b<1 || b>28){
-                cout<<"INVALID INPUT FOR DAY RE-ENTER VALUE BETWEEN 1 to 28 : ";
-                cin>>b;
-                cout<<endl<<endl<<endl;
-
-
-
-            }
-        }
-        day=b;
-
-
-
-    }
-    void printUniversal(){
-        if(day<10){
-            cout<<"0"<<day<<"/";
-        }
-        else{
-            cout<<day<<"/";
-        }
-        if(month<10){
-            cout<<"0"<<month<<"/";
-        }
-        else{
-            cout<<month<<"/";
-        }
-        cout<<year<<"  "<<endl<<endl;
-    }
-
-    void nextDay(){
-        day=day+1;
-        if (month==1 || month==3 || month==5 || month==7 || month==8 ||month==10||month==12){
-            if (day==32){
-                day=1;
-                month=month+1;
-                if(month==13){
-                    month=1;
-                    year=year+1;
-                }
-            }
-        }
-        if (month==4 || month==6 || month==9 || month==11){
-            if(day==31){
-                day=1;
-                month=month+1;
-            }
-        }
-        if(month==2){
-            if(day==29){
-                day=1;
-                month=month+1;
-            }
-        }
-
-
-
-
-    }
-
-
-
 
 };
 int main() {
-    DateAndTime z(12,00,00,"AM",1,1,2001);
-    z.printStandard();
-    z.printUniversal();
-    for (int i = 0; i < 86400; i++) {
-        z.tick();
-        z.printStandard();
-        z.printUniversal();
+    Time t1(12,0,0,"AM");
+    t1.display();
+    for(int i=1;i<=60;i++){
+        t1.tick();
+    }
+    t1.display();
+    for(int i=1;i<=3600;i++){
+        t1.tick();
+    }
+    t1.display();
+    for(int i=1;i<=43200;i++){
+        t1.tick();
+    }
+    t1.display();
+    for (int j = 1; j <=43200 ; j++) {
+        t1.tick();
 
     }
+    t1.display();
 
     return 0;
 }
